@@ -34,10 +34,11 @@ var myStyle = {
 var geojsonLayerWells = L.geoJson(null,{
     style: myStyle
 });
-//geojsonLayerWells.addTo(map);
+geojsonLayerWells.addTo(map);
 
 function loadGeoJson(data) {
     console.log(data);
+    geojsonLayerWells.clearLayers();
     geojsonLayerWells.addData(data);
     map.addLayer(geojsonLayerWells);
 };
