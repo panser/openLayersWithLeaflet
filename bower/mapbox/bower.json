@@ -1,0 +1,23 @@
+{
+  "name": "bower",
+  "homepage": "https://github.com/panser/openLayersWithLeaflet",
+  "authors": [
+    "Sergey Panov <gostroy@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "proj4": "~2.3.12",
+    "jQuery": "~2.2.0",
+    "mapbox.js": "~2.2.4"
+  }
+}

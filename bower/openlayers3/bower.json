@@ -1,0 +1,25 @@
+{
+  "name": "bower",
+  "homepage": "https://github.com/panser/openLayersWithLeaflet",
+  "authors": [
+    "Sergey Panov <gostroy@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "reqwest": "~2.0.5",
+    "ol3-popup": "~1.0.1",
+    "proj4": "~2.3.12",
+    "openlayers": "https://github.com/openlayers/ol3/releases/download/v3.13.0/v3.13.0-dist.zip",
+    "jQuery": "~2.2.0"
+  }
+}

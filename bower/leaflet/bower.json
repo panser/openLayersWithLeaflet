@@ -1,0 +1,31 @@
+{
+  "name": "bower",
+  "homepage": "https://github.com/panser/openLayersWithLeaflet",
+  "authors": [
+    "Sergey Panov <gostroy@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "reqwest": "~2.0.5",
+    "leaflet": "~0.7.7",
+    "Proj4Leaflet": "proj4leaflet#~0.7.2",
+    "proj4": "~2.3.12",
+    "jQuery": "~2.2.0",
+    "mapbox-gl-leaflet": "https://github.com/mapbox/mapbox-gl-leaflet.git#~0.0.1",
+    "hoverboard": "~1.1.3",
+    "Leaflet-WFST": "~1.0.0"
+  },
+  "resolutions": {
+    "proj4": "~2.1.2"
+  }
+}
