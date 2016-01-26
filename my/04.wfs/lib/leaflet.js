@@ -20,23 +20,54 @@ var crs = new L.Proj.CRS('EPSG:25833',
     //    ],
     //    origin: [0, 0]
     //}
-)
+);
 
-//http://localhost:7070/geoserver/borders_Fylkesgrense/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=borders_Fylkesgrense:ADM_enheter_Norge_Fylkesgrense_KURVE&maxFeatures=50&outputFormat=application%2Fjson
-var boundaries = new L.WFS({
-    url: 'http://localhost:7070/geoserver/borders_Fylkesgrense/ows',
-    //typeNS: 'DescribeFeatureType',
-    //typeNS: 'line',
-    //typeNS: 'Borders_Fylkesgrense',
-    typeNS: 'http://localhost:7070/geoserver/borders_Fylkesgrense',
-    typeName: 'borders_Fylkesgrense:ADM_enheter_Norge_Fylkesgrense_KURVE',
-    crs: crs,
-    //crs: L.CRS.EPSG4326,
-    style: {
-        color: 'blue',
-        weight: 2
-    }
-}).addTo(map)
-    .on('load', function () {
-        map.fitBounds(boundaries);
-    })
+
+
+var wellmaxzoom = 7;
+
+var myStyle = {
+    "color": 'gray',
+    "weight": 3,
+    "opacity": 1
+};
+var geojsonLayerWells = L.geoJson(null,{
+    style: myStyle
+});
+//geojsonLayerWells.addTo(map);
+
+function loadGeoJson(data) {
+    console.log(data);
+    geojsonLayerWells.addData(data);
+    map.addLayer(geojsonLayerWells);
+};
+
+map.on('moveend', function(){
+    if(map.getZoom() > wellmaxzoom){
+        var geoJsonUrl ='http://localhost:8080/geoserver/borders_Kommunegrense/ows';
+        var defaultParameters = {
+            service: 'WFS',
+            version: '1.0.0',
+            request: 'getFeature',
+            typeName: 'borders_Kommunegrense:ADM_enheter_Norge_Kommunegrense_KURVE',
+            maxFeatures: 30000,
+            outputFormat: 'application/json',
+            srsname: 'EPSG:4326'
+        };
+
+        var customParams = {
+            bbox: map.getBounds().toBBoxString() + ',EPSG:4326',
+        };
+        var parameters = L.Util.extend(defaultParameters, customParams);
+        console.log(geoJsonUrl + L.Util.getParamString(parameters));
+
+        $.ajax({
+            url: geoJsonUrl + L.Util.getParamString(parameters),
+            datatype: 'json',
+            jsonCallback: 'getJson',
+            success: loadGeoJson
+        });
+    }else{
+        map.removeLayer(geojsonLayerWells);
+    };
+});
