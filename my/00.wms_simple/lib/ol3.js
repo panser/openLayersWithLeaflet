@@ -1,6 +1,6 @@
 'use strict';
 
-//proj4.defs("EPSG:25833","+proj=utm +zone=33 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
+proj4.defs("EPSG:25833","+proj=utm +zone=33 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
 
 var map = new ol.Map({
     target: 'map',
@@ -14,20 +14,63 @@ var map = new ol.Map({
                 }
             })
         }),
-        new ol.layer.Tile({
-            source: new ol.source.TileWMS({
-                url: 'http://localhost:7070/geoserver/borders_Kommunegrense/wms',
-                params: {
-                    LAYERS: 'borders_Kommunegrense:ADM_enheter_Norge_Kommunegrense_KURVE',
-                    VERSION: '1.1.1'
-                }
-                //projection: 'EPSG:25833'
-            })
-        })
     ],
     view: new ol.View({
         center: [880337, 8561319],
-        zoom: 8
+        zoom: 7
     })
 });
 
+
+
+var bordersKommunegrenseLayer = new ol.layer.Tile({
+    source: new ol.source.TileWMS({
+        url: 'http://localhost:7070/geoserver/borders_Kommunegrense/wms',
+        params: {
+            LAYERS: 'borders_Kommunegrense:ADM_enheter_Norge_Kommunegrense_KURVE',
+            VERSION: '1.1.1'
+        }
+    })
+});
+var bordersFylkesgrenseLayer = new ol.layer.Tile({
+    source: new ol.source.TileWMS({
+        url: 'http://localhost:7070/geoserver/borders_Fylkesgrense/wms',
+        params: {
+            LAYERS: 'borders_Fylkesgrense:ADM_enheter_Norge_Fylkesgrense_KURVE',
+            VERSION: '1.1.1'
+        }
+    })
+});
+var bordersRiksgrenseLayer = new ol.layer.Tile({
+    source: new ol.source.TileWMS({
+        url: 'http://localhost:7070/geoserver/borders_Riksgrense/wms',
+        params: {
+            LAYERS: 'borders_Riksgrense:ADM_enheter_Norge_Riksgrense_KURVE',
+            VERSION: '1.1.1'
+        }
+    })
+});
+var urbanRuralLayer = new ol.layer.Tile({
+    source: new ol.source.TileWMS({
+        url: 'http://localhost:7070/geoserver/urBanRural/wms',
+        params: {
+            //LAYERS: 'urBanRural:tettsted_4326',
+            LAYERS: 'urBanRural:Tettsted2014',
+            VERSION: '1.1.1'
+        }
+    })
+});
+
+$('#jsonCheckBox').change(function () {
+    if ($(this).is(":checked")) {
+        //map.addLayer(bordersKommunegrenseLayer);
+        //map.addLayer(bordersFylkesgrenseLayer);
+        //map.addLayer(bordersRiksgrenseLayer);
+        map.addLayer(urbanRuralLayer);
+    } else {
+        //map.removeLayer(bordersKommunegrenseLayer);
+        //map.removeLayer(bordersFylkesgrenseLayer);
+        //map.removeLayer(bordersRiksgrenseLayer);
+        map.removeLayer(urbanRuralLayer);
+    }
+});
