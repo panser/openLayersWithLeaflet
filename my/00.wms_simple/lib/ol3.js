@@ -24,6 +24,7 @@ var map = new ol.Map({
 
 
 var bordersKommunegrenseLayer = new ol.layer.Tile({
+    opacity: 0.3,
     source: new ol.source.TileWMS({
         url: 'http://localhost:8080/geoserver/borders_Kommunegrense/wms',
         params: {
@@ -33,6 +34,7 @@ var bordersKommunegrenseLayer = new ol.layer.Tile({
     })
 });
 var bordersFylkesgrenseLayer = new ol.layer.Tile({
+    opacity: 0.3,
     source: new ol.source.TileWMS({
         url: 'http://localhost:8080/geoserver/borders_Fylkesgrense/wms',
         params: {
@@ -42,6 +44,7 @@ var bordersFylkesgrenseLayer = new ol.layer.Tile({
     })
 });
 var bordersRiksgrenseLayer = new ol.layer.Tile({
+    opacity: 0.3,
     source: new ol.source.TileWMS({
         url: 'http://localhost:8080/geoserver/borders_Riksgrense/wms',
         params: {
@@ -51,6 +54,7 @@ var bordersRiksgrenseLayer = new ol.layer.Tile({
     })
 });
 var urbanRuralLayer = new ol.layer.Tile({
+    opacity: 0.3,
     source: new ol.source.TileWMS({
         url: 'http://localhost:8080/geoserver/urBanRural/wms',
         params: {
