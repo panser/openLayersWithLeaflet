@@ -48,7 +48,8 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
                 width: size.x,
                 layers: this.wmsParams.layers,
                 query_layers: this.wmsParams.layers,
-                info_format: 'text/html'
+                info_format: 'application/json'
+                //info_format: 'text/html'
             };
 
         params[params.version === '1.3.0' ? 'i' : 'x'] = point.x;
@@ -58,14 +59,21 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
     },
 
     showGetFeatureInfo: function (err, latlng, content) {
-        if (err) { console.log(err); return; } // do nothing if there's an error
+        //if (err) { console.log(err); return; } // do nothing if there's an error
+        if (content.features.length == 0) return;  // do nothing if there's no Feature object at that point
 
         // Otherwise show the content in a popup, or something.
         L.popup({ maxWidth: 800})
             .setLatLng(latlng)
-            .setContent(content)
+            .setContent(this.getPopupContent(content))
+            //.setContent(content)
             .openOn(this._map);
+    },
+
+    getPopupContent: function (content) {
+        return content.features[0].properties.Tettstedsn;
     }
+
 });
 
 L.tileLayer.betterWms = function (url, options) {
