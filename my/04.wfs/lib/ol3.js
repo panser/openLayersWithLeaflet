@@ -33,8 +33,8 @@ var vectorSource = new ol.source.Vector({
         //    'version=1.1.0&request=GetFeature&typename=osm:water_areas&' +
         //    'outputFormat=application/json&srsname=EPSG:3857&' +
         //    'bbox=' + extent.join(',') + ',EPSG:3857';
-        return 'http://localhost:8080/geoserver/borders_Kommunegrense/ows?service=WFS&' +
-            'version=1.0.0&request=GetFeature&typeName=borders_Kommunegrense:ADM_enheter_Norge_Kommunegrense_KURVE&' +
+        return 'http://localhost:8080/geoserver/urBanRural/ows?service=WFS&' +
+            'version=1.0.0&request=GetFeature&typeName=urBanRural:Tettsted2014&' +
             'outputFormat=application/json&srsname=EPSG:3857&' +
             'bbox=' + extent.join(',') + ',EPSG:3857';
         //return 'http://localhost:8080/geoserver/borders_Kommunegrense/ows?service=WFS&' +
@@ -56,3 +56,13 @@ var vector = new ol.layer.Vector({
     })
 });
 map.addLayer(vector);
+
+
+$('#jsonCheckBox').change(function () {
+    if ($(this).is(":checked")) {
+        map.addLayer(vector);
+    } else {
+        map.removeLayer(vector);
+    }
+});
+

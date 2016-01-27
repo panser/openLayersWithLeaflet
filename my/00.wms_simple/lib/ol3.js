@@ -25,7 +25,7 @@ var map = new ol.Map({
 
 var bordersKommunegrenseLayer = new ol.layer.Tile({
     source: new ol.source.TileWMS({
-        url: 'http://localhost:7070/geoserver/borders_Kommunegrense/wms',
+        url: 'http://localhost:8080/geoserver/borders_Kommunegrense/wms',
         params: {
             LAYERS: 'borders_Kommunegrense:ADM_enheter_Norge_Kommunegrense_KURVE',
             VERSION: '1.1.1'
@@ -34,7 +34,7 @@ var bordersKommunegrenseLayer = new ol.layer.Tile({
 });
 var bordersFylkesgrenseLayer = new ol.layer.Tile({
     source: new ol.source.TileWMS({
-        url: 'http://localhost:7070/geoserver/borders_Fylkesgrense/wms',
+        url: 'http://localhost:8080/geoserver/borders_Fylkesgrense/wms',
         params: {
             LAYERS: 'borders_Fylkesgrense:ADM_enheter_Norge_Fylkesgrense_KURVE',
             VERSION: '1.1.1'
@@ -43,7 +43,7 @@ var bordersFylkesgrenseLayer = new ol.layer.Tile({
 });
 var bordersRiksgrenseLayer = new ol.layer.Tile({
     source: new ol.source.TileWMS({
-        url: 'http://localhost:7070/geoserver/borders_Riksgrense/wms',
+        url: 'http://localhost:8080/geoserver/borders_Riksgrense/wms',
         params: {
             LAYERS: 'borders_Riksgrense:ADM_enheter_Norge_Riksgrense_KURVE',
             VERSION: '1.1.1'
@@ -52,11 +52,11 @@ var bordersRiksgrenseLayer = new ol.layer.Tile({
 });
 var urbanRuralLayer = new ol.layer.Tile({
     source: new ol.source.TileWMS({
-        url: 'http://localhost:7070/geoserver/urBanRural/wms',
+        url: 'http://localhost:8080/geoserver/urBanRural/wms',
         params: {
             //LAYERS: 'urBanRural:tettsted_4326',
             LAYERS: 'urBanRural:Tettsted2014',
-            VERSION: '1.1.1'
+            VERSION: '1.1.1',
         }
     })
 });

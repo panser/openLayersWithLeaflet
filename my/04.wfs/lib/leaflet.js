@@ -45,12 +45,14 @@ function loadGeoJson(data) {
 
 map.on('moveend', function(){
     if(map.getZoom() > wellmaxzoom){
-        var geoJsonUrl ='http://localhost:8080/geoserver/borders_Kommunegrense/ows';
+        var geoJsonUrl ='http://localhost:8080/geoserver/urBanRural/wms';
+        //var geoJsonUrl ='http://localhost:8080/geoserver/borders_Kommunegrense/ows';
         var defaultParameters = {
             service: 'WFS',
             version: '1.0.0',
             request: 'getFeature',
-            typeName: 'borders_Kommunegrense:ADM_enheter_Norge_Kommunegrense_KURVE',
+            typeName: 'urBanRural:Tettsted2014',
+            //typeName: 'borders_Kommunegrense:ADM_enheter_Norge_Kommunegrense_KURVE',
             maxFeatures: 30000,
             outputFormat: 'application/json',
             srsname: 'EPSG:4326'
@@ -72,3 +74,13 @@ map.on('moveend', function(){
         map.removeLayer(geojsonLayerWells);
     };
 });
+
+
+$('#jsonCheckBox').change(function () {
+    if ($(this).is(":checked")) {
+        map.addLayer(geojsonLayerWells);
+    } else {
+        map.removeLayer(geojsonLayerWells);
+    }
+});
+
