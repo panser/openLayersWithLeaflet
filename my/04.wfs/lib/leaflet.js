@@ -8,23 +8,12 @@ var map = new L.Map('map', {
         })
     ]
 });
-map.setView([62.5, 4.2], 5);
-
-
-//proj4.defs("EPSG:25833","+proj=utm +zone=33 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
-var crs = new L.Proj.CRS('EPSG:25833',
-    '+proj=utm +zone=33 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs'
-    //{
-    //    resolutions: [
-    //        8192, 4096, 2048, 1024, 512, 256, 128
-    //    ],
-    //    origin: [0, 0]
-    //}
-);
+map.setView([62.5, 4.2], 7);
 
 
 
-var wellmaxzoom = 7;
+var wellmaxzoom = 5;
+//var wellmaxzoom = 7;
 
 var myStyle = {
     "color": 'gray',
@@ -45,13 +34,15 @@ function loadGeoJson(data) {
 
 map.on('moveend', function(){
     if(map.getZoom() > wellmaxzoom){
-        var geoJsonUrl ='http://localhost:8080/geoserver/urBanRural/wms';
+        var geoJsonUrl ='http://localhost:8080/geoserver/kommuner/ows';
+        //var geoJsonUrl ='http://localhost:8080/geoserver/urBanRural/ows';
         //var geoJsonUrl ='http://localhost:8080/geoserver/borders_Kommunegrense/ows';
         var defaultParameters = {
             service: 'WFS',
             version: '1.0.0',
             request: 'getFeature',
-            typeName: 'urBanRural:Tettsted2014',
+            typeName: 'kommuner:kommuner',
+            //typeName: 'urBanRural:Tettsted2014',
             //typeName: 'borders_Kommunegrense:ADM_enheter_Norge_Kommunegrense_KURVE',
             maxFeatures: 30000,
             outputFormat: 'application/json',
