@@ -9,14 +9,36 @@ $(document).ready(function () {
                 format: 'image/png'
             })]
     });
-    map.setView([62.5, 4.2], 5);
+    map.setView([62.5, 8.2], 8);
 
+    var geoLayer;
+    var oneRegionLayer;
 
-    var geoLayer = new L.GeoJSON();
-    var jqxhr = $.getJSON('../../data/geojson/norway.geojson');
+    var jqxhr = $.getJSON('../../data/geojson/kommuner.geojson');
+    //var jqxhr = $.getJSON('../../data/geojson/norway.geojson');
     //var jqxhr = $.getJSON('../../data/geojson/test.geojson');
+
+    function onEachFeature(feature, layer) {
+        layer.bindPopup(feature.properties.navn);
+        layer.on({
+            click: function(e){
+                if (oneRegionLayer != null) {
+                    map.removeLayer(oneRegionLayer);
+                }
+                oneRegionLayer = L.geoJson(feature, {
+                    style:  {color: 'red'}
+                    ,fill: true
+                });
+                map.fitBounds(oneRegionLayer.getBounds());
+                map.addLayer(oneRegionLayer);
+            }
+        });
+    };
+
     jqxhr.done(function(data){
-        geoLayer.addData(data);
+        geoLayer = L.geoJson(data, {
+            onEachFeature: onEachFeature
+        });
     });
 
     $('#jsonCheckBox').change(function () {
@@ -24,6 +46,9 @@ $(document).ready(function () {
             map.addLayer(geoLayer);
         } else {
             map.removeLayer(geoLayer);
+            if (oneRegionLayer != null) {
+                map.removeLayer(oneRegionLayer);
+            }
         }
     });
 
