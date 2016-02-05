@@ -28,8 +28,9 @@ $(document).ready(function () {
     });
 
     var topoLayer = new L.TopoJSON();
+    var jqxhr = $.getJSON('../../data/topojson/kommuner.topojson');
     //var jqxhr = $.getJSON('../../data/topojson/world-110m.json');
-    var jqxhr = $.getJSON('../../data/topojson/test.topojson');
+    //var jqxhr = $.getJSON('../../data/topojson/test.topojson');
     //var jqxhr = $.getJSON('../../data/topojson/test_full.topojson');
     jqxhr.done(function(data){
         topoLayer.addData(data);

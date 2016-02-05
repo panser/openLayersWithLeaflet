@@ -37,7 +37,8 @@ $(document).ready(function () {
 
     jqxhr.done(function(data){
         geoLayer = L.geoJson(data, {
-            onEachFeature: onEachFeature
+            weight: 2
+            ,onEachFeature: onEachFeature
         });
     });
 
